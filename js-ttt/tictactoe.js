@@ -76,8 +76,16 @@ var gameCycle = function() {
 
   var gameGrids = document.getElementsByClassName("game-grid");
   Array.prototype.forEach.call(gameGrids, function(el,i) {
-    // el.addEventListener("mouseover", function() { this.innerHTML = "x"});
-    // el.addEventListener("mouseout", function() { this.innerHTML = "asdf"});
+    el.addEventListener("mouseover", function() {
+      if (!Array.prototype.includes.call(el.classList, "marked")) {
+        this.classList.add("marked-" + currentPlayer.color);
+      }
+    });
+    el.addEventListener("mouseout", function() {
+      if (!Array.prototype.includes.call(el.classList, "marked")) {
+        this.classList.remove("marked-" + currentPlayer.color);
+      }
+    });
     el.addEventListener("click", function() {
       if (!Array.prototype.includes.call(el.classList, "marked") && !won) {
         console.log(el.id);
