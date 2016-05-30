@@ -26,9 +26,7 @@ var gameCycle = function() {
 
   var includesAll = function() {
     for (var i = 0; i < arguments.length; i++) {
-      if (!this.includes(arguments[i])) {
-        return false;
-      }
+      if (!this.includes(arguments[i])) { return false; }
     }
     return true;
   }; // includesALl
@@ -59,18 +57,18 @@ var gameCycle = function() {
   }; //turn
 
   var checkWin = function() {
-    for (var j = 0; j < winConditions.length; j++) {
-      if (includesAll.apply(currentPlayer.markedSpots, winConditions[j])) {
-        console.log("Player " + currentPlayer.color + " wins!");
+    winConditions.forEach(function(el, i, arr) {
+      if (includesAll.apply(currentPlayer.markedSpots, el)) {
+        console.log(currentPlayer.color + " wins!");
         overlay.style.top = "";
         results.innerHTML = "Player " + currentPlayer.color + " wins!";
         return won = true;
-      } else if (allMarkedSpots.length >= 9) {
-        console.log("It's a cat's game!");
-        overlay.style.top = "";
-        results.innerHTML = "It's a cat's game!";
-        return won = false;
       }
+    })
+    if (allMarkedSpots.length === 9 && !won) {
+      console.log("It's a cat's game!")
+      overlay.style.top = "";
+      results.innerHTML = "It's a cat's game!";
     }
   }; //checkWin
 
